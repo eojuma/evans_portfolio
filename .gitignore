@@ -1,0 +1,13 @@
+# Ignore local environment variables
+.env
+
+# Ignore compiled binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+backend/api
+
+# Ignore OS files
+.DS_Store
