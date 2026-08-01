@@ -7,11 +7,14 @@ interface ProjectCardProps {
 export const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
     <div className="project-card">
-      <h3>{project.title}</h3>
-      <p>{project.description}</p>
+      <div className="card-header">
+        <h3>{project.title}</h3>
+      </div>
       
-      {/* Tech Stack Badges */}
-      <div className="tech-stack" style={{ display: "flex", gap: "8px", justifyContent: "center", flexWrap: "wrap", margin: "12px 0" }}>
+      <p className="project-description">{project.description}</p>
+
+      {/* Backend Tech Badges */}
+      <div className="tech-stack">
         {project.tech_stack?.map((tech, index) => (
           <span key={index} className="tech-badge">
             {tech}
@@ -19,16 +22,16 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
         ))}
       </div>
 
-      {/* Action Links */}
-      <div className="card-links" style={{ display: "flex", gap: "16px", justifyContent: "center" }}>
+      {/* Direct Links for Employers */}
+      <div className="card-links">
         {project.github_url && (
-          <a href={project.github_url} target="_blank" rel="noreferrer">
-            GitHub
+          <a href={project.github_url} target="_blank" rel="noreferrer" className="btn-link">
+            <span>Source Code (GitHub)</span> ↗
           </a>
         )}
         {project.live_url && (
-          <a href={project.live_url} target="_blank" rel="noreferrer">
-            Live Demo
+          <a href={project.live_url} target="_blank" rel="noreferrer" className="btn-link">
+            <span>Live API / Demo</span> ↗
           </a>
         )}
       </div>

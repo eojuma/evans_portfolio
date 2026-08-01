@@ -8,15 +8,14 @@ function App() {
       <aside className="left-sidebar">
         <div className="hero-bio">
           <h1>Evans</h1>
-          <h2>Full-Stack Software Engineer</h2>
+          <h2>Backend Software Engineer</h2>
           <p>
-            I build accessible, high-performance web applications with Go, 
-            Gin, MongoDB, and React.
+            I design and build scalable REST APIs, microservices, and database systems using Go (Golang), Gin, and MongoDB.
           </p>
         </div>
 
         <div className="social-links">
-          {/* Add social links or icon svgs here */}
+          {/* Add GitHub / LinkedIn links here */}
         </div>
       </aside>
 
