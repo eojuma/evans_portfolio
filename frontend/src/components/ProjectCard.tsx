@@ -18,10 +18,8 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
     <div className="project-card">
       <div className="card-header">
         <div className="card-header-left">
-          <span className="method-badge">GET</span>
           <h3 className="card-path">{path}</h3>
         </div>
-        <span className="status-pill">200 OK</span>
       </div>
 
       <p className="project-description">{project.description}</p>
