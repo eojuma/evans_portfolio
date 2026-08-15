@@ -1,31 +1,34 @@
-import { ProjectSection } from "./sections/ProjectSection";
-import { ContactSection } from "./sections/ContactSection";
+import { TerminalIntro } from "./components/TerminalIntro";
+import { Footer } from "./components/Footer";
+
+const projects = [
+  { slug: "skillmatch", title: "SkillMatch", status: "200", description: "AI job-matching platform built for a hackathon team.", role: "Backend engineer · AWS infrastructure", stack: ["Go", "AWS", "PostgreSQL", "Docker"], outcome: "Owned the AWS integration and shipped with a 5-engineer team." },
+  { slug: "business-os", title: "Business OS", status: "202", description: "AI-assisted SME operating system for chat-first inventory and sales.", role: "Builder · In progress", stack: ["Go", "LLMs", "PostgreSQL", "Docker"], outcome: "Turning manual records into a conversational workflow for owners." },
+  { slug: "african-vault", title: "African Vault", status: "200", description: "Banking and payments platform with account management and transfers.", role: "Solo engineer", stack: ["Go", "PostgreSQL", "REST"], outcome: "Built statement exports and core money movement flows end to end." },
+  { slug: "guidely", title: "Guidely", status: "200", description: "RAG application audited for reliability in production.", role: "Solo auditor", stack: ["Python", "RAG", "Embeddings"], outcome: "Found and fixed 8 production issues; migrated the embedding pipeline." },
+  { slug: "civicvote", title: "CivicVote", status: "200", description: "Civic engagement platform for participation and accountability.", role: "Backend engineer · Team", stack: ["Go", "Auth", "RBAC", "CRUD"], outcome: "Shipped authentication, role-based access, and core CRUD features." },
+  { slug: "social-network", title: "Social Network Platform", status: "200", description: "Zone01 team project with real-time conversations.", role: "Backend engineer · Zone01 Kisumu", stack: ["Go", "WebSockets", "SQLite"], outcome: "Implemented real-time chat and the supporting social graph." },
+  { slug: "groupie-tracker", title: "Groupie Tracker", status: "200", description: "REST client that turns third-party APIs into a usable experience.", role: "Solo engineer", stack: ["Go", "REST", "HTTP"], outcome: "Integrated external endpoints with resilient client-side handling." },
+];
+
+const skills = {
+  Languages: ["Go", "TypeScript", "Python", "SQL"],
+  Backend: ["REST API design", "Authentication / authorization", "WebSockets", "RAG systems"],
+  Databases: ["PostgreSQL", "MongoDB", "SQLite", "Database design"],
+  "Cloud & DevOps": ["AWS", "Docker", "Linux", "CI/CD"],
+  "CS Fundamentals": ["Data structures", "Algorithms", "Networking", "System design"],
+};
 
 function App() {
-  return (
-    <div className="app-container">
-      {/* Left Sidebar (Fixed) */}
-      <aside className="left-sidebar">
-        <div className="hero-bio">
-          <h1>Evans</h1>
-          <h2>Backend Software Engineer</h2>
-          <p>
-            I design and build scalable REST APIs, microservices, and database systems using Go (Golang), Gin, and MongoDB.
-          </p>
-        </div>
-
-        <div className="social-links">
-          {/* Add GitHub / LinkedIn links here */}
-        </div>
-      </aside>
-
-      {/* Right Column (Scrollable Content) */}
-      <main className="right-content">
-        <ProjectSection />
-        <ContactSection />
-      </main>
-    </div>
-  );
+  return <div className="app-shell">
+    <header className="topbar"><a className="brand" href="#top"><span className="brand-mark">&gt;_</span> api.evans.dev</a><span className="version">v1.0.0</span><nav><a href="#about">/about</a><a href="#projects">/projects</a><a href="#skills">/skills</a><a href="#contact">/contact</a></nav></header>
+    <main id="top">
+      <section className="hero"><div className="hero-copy"><p className="kicker"><span className="live-dot" /> 200 OK · profile available</p><h1>Backend systems,<br /><span>built to be useful.</span></h1><p className="hero-lede">Evans Juma is a backend software engineer in Kisumu, Kenya. He builds dependable APIs and data systems with Go as the anchor.</p><div className="hero-meta"><span>BASE URL</span><code>https://api.evans.dev</code></div></div><TerminalIntro /></section>
+      <section id="about" className="docs-section about"><div className="section-label"><span>01</span><span>GET</span><code>/about</code></div><div className="section-intro"><h2>Documentation overview</h2><p>I'm an engineer shaped by Zone01 Kisumu, where shipping, debugging, and explaining the trade-offs matter as much as the syntax. My focus is the backend: clear contracts, boring infrastructure, and systems that keep their promises under pressure.</p><p>Go is my anchor language, but the real tool is judgment: choosing the smallest dependable design that can grow with the people using it.</p></div><div className="capabilities"><h3>supported_operations</h3><div className="capability-grid"><span>01 <b>REST API design</b></span><span>02 <b>Authentication &amp; authorization</b></span><span>03 <b>Database design</b></span><span>04 <b>Cloud integration</b></span><span>05 <b>Real-time systems</b></span><span>06 <b>Production debugging</b></span></div></div></section>
+      <section id="projects" className="docs-section"><div className="section-label"><span>02</span><span>GET</span><code>/projects</code></div><div className="section-intro"><h2>Project registry</h2><p>Selected work, represented as resources. Every response includes the part I owned and the result it produced.</p></div><div className="endpoint-list">{projects.map((project) => <article className="endpoint" key={project.slug}><div className="endpoint-head"><div><span className="method">GET</span><code>/projects/{project.slug}</code></div><span className={`status status-${project.status}`}>{project.status} {project.status === "202" ? "ACCEPTED" : "OK"}</span></div><p className="endpoint-description"><span>description</span> {project.description}</p><div className="response"><div className="response-label"><span>response</span><span>application/json</span></div><pre><i>&#123;</i>{`\n  `}<em>"role"</em>: <strong>"{project.role}"</strong>,{`\n  `}<em>"stack"</em>: [<strong>{project.stack.map((s) => `"${s}"`).join(", ")}</strong>],{`\n  `}<em>"outcome"</em>: <strong>"{project.outcome}"</strong>{`\n`}<i>&#125;</i></pre></div></article>)}</div></section>
+      <section id="skills" className="docs-section"><div className="section-label"><span>03</span><span>GET</span><code>/skills</code></div><div className="section-intro"><h2>Request schema</h2><p>Accepted parameters for building, operating, and improving backend systems.</p></div><div className="schema"><div className="schema-head"><span>parameter</span><span>type</span><span>supported_values</span></div>{Object.entries(skills).map(([category, values]) => <div className="schema-row" key={category}><strong>{category}</strong><code>string[]</code><span>{values.join(" · ")}</span></div>)}</div></section>
+      <section id="contact" className="docs-section contact"><div className="section-label"><span>04</span><span>POST</span><code>/contact</code></div><div className="section-intro"><h2>Start a conversation</h2><p>Have a backend problem worth solving? Send a request. I’m open to thoughtful collaborations, product teams, and engineering conversations.</p></div><div className="contact-directory response"><div className="response-label"><span>available_channels</span><span>4 endpoints</span></div><div className="contact-links"><a href="mailto:evansjuma1e@gmail.com"><span>Email</span><b>evansjuma1e@gmail.com</b><i>↗</i></a><a href="https://github.com/eojuma" target="_blank" rel="noreferrer"><span>GitHub</span><b>eojuma</b><i>↗</i></a><a href="https://www.linkedin.com/in/Evans-Juma" target="_blank" rel="noreferrer"><span>LinkedIn</span><b>Evans Juma</b><i>↗</i></a><a href="https://dev.to/juma_evans_34e389ef539266" target="_blank" rel="noreferrer"><span>Dev.to</span><b>Juma Evans</b><i>↗</i></a></div></div></section>
+    </main><Footer />
+  </div>;
 }
-
 export default App;
