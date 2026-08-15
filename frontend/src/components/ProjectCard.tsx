@@ -4,34 +4,61 @@ interface ProjectCardProps {
   project: Project;
 }
 
+const slugify = (title: string) =>
+  title
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
 export const ProjectCard = ({ project }: ProjectCardProps) => {
+  const path = `/projects/${slugify(project.title)}`;
+
   return (
     <div className="project-card">
       <div className="card-header">
-        <h3>{project.title}</h3>
+        <div className="card-header-left">
+          <span className="method-badge">GET</span>
+          <h3 className="card-path">{path}</h3>
+        </div>
+        <span className="status-pill">200 OK</span>
       </div>
-      
+
       <p className="project-description">{project.description}</p>
 
-      {/* Backend Tech Badges */}
-      <div className="tech-stack">
-        {project.tech_stack?.map((tech, index) => (
-          <span key={index} className="tech-badge">
-            {tech}
-          </span>
-        ))}
-      </div>
+      {project.tech_stack && project.tech_stack.length > 0 && (
+        <div className="tech-stack">
+          <span className="stack-key">"stack"</span>
+          <span>: [</span>
+          {project.tech_stack.map((tech, index) => (
+            <span key={tech}>
+              <span className="tech-badge">"{tech}"</span>
+              {index < project.tech_stack.length - 1 ? ", " : ""}
+            </span>
+          ))}
+          <span>]</span>
+        </div>
+      )}
 
-      {/* Direct Links for Employers */}
       <div className="card-links">
         {project.github_url && (
-          <a href={project.github_url} target="_blank" rel="noreferrer" className="btn-link">
-            <span>Source Code (GitHub)</span> ↗
+          <a
+            href={project.github_url}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-link"
+          >
+            Source ↗
           </a>
         )}
         {project.live_url && (
-          <a href={project.live_url} target="_blank" rel="noreferrer" className="btn-link">
-            <span>Live API / Demo</span> ↗
+          <a
+            href={project.live_url}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-link"
+          >
+            Live demo ↗
           </a>
         )}
       </div>
