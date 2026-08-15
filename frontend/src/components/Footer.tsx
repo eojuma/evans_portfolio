@@ -1,7 +1,7 @@
 export const Footer = () => {
   return (
     <footer>
-      <p>&copy; {new Date().getFullYear()} Evans. All rights reserved.</p>
+      <p>© {new Date().getFullYear()} Evans. Built with Go, Gin, MongoDB, React &amp; Vite.</p>
     </footer>
   );
 };
