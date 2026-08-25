@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import projectsData from "./data/projects.json";
+import { useLiveStatus } from "./hooks/useLiveStatus";
 
 type Project = { slug:string; title:string; endpoint:string; problem:string; approach:string; outcome:string; role:string; status:string; stack:string[]; filters:string[]; repo?:string; demo?:string };
 const projects = projectsData as Project[];
@@ -7,6 +8,20 @@ const filters = ["All", "Go", "Python", "AI / Bedrock", "Hackathon"];
 const contact = { email:"evansjuma1e@gmail.com", github:"https://github.com/eojuma", linkedin:"https://www.linkedin.com/in/Evans-Juma", devto:"https://dev.to/juma_evans_34e389ef539266" };
 
 function App() {
+  const { status, loading: statusLoading } = useLiveStatus();
+  useEffect(() => {
+    const card = document.querySelector<HTMLElement>(".status-console");
+    if (!card) return;
+    card.classList.toggle("status-loading", statusLoading);
+    card.setAttribute("aria-busy", String(statusLoading));
+    if (statusLoading) return;
+    const pre = card.querySelector("pre");
+    const name = card.querySelector(".building-status strong");
+    const description = card.querySelector(".building-status p");
+    if (pre) pre.textContent = `{\n  "engineer": "${status.engineer}",\n  "location": "${status.location}",\n  "focus": [${status.focus.map((item) => `"${item}"`).join(", ")}],\n  "availability": ${status.availability}\n}`;
+    if (name) name.textContent = status.currently_building.name;
+    if (description) description.textContent = status.currently_building.description;
+  }, [status, statusLoading]);
   const [theme,setTheme] = useState<"dark"|"light">(() => localStorage.getItem("theme") === "light" ? "light" : "dark");
   const [filter,setFilter] = useState("All"); const [expanded,setExpanded] = useState<string|null>("skillmatch"); const [menuOpen,setMenuOpen] = useState(false);
   useEffect(() => { document.documentElement.dataset.theme = theme; localStorage.setItem("theme",theme); }, [theme]);

@@ -1,0 +1,13 @@
+.status-console.status-loading pre,
+.status-console.status-loading .building-status div {
+  animation: status-pulse 1s ease-in-out infinite;
+}
+
+@keyframes status-pulse {
+  50% { opacity: .48; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-console.status-loading pre,
+  .status-console.status-loading .building-status div { animation: none; }
+}

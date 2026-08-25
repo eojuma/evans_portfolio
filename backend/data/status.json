@@ -1,0 +1,11 @@
+{
+  "engineer": "Evans Juma",
+  "location": "Kisumu, Kenya",
+  "focus": ["Go", "AI", "systems"],
+  "availability": true,
+  "currently_building": {
+    "name": "African Vault",
+    "description": "Digital SACCO infrastructure for Kenyan communities"
+  },
+  "updated_at": "2026-08-25T00:00:00Z"
+}

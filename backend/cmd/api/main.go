@@ -21,6 +21,7 @@ func main() {
 		c.JSON(200, gin.H{"status": "ok", "service": "evans-portfolio-api"})
 	})
 	r.GET("/api/portfolio", handlers.GetPortfolio)
+	r.GET("/api/status", handlers.NewStatusHandler("data/status.json").GetStatus)
 
 	if db, err := database.ConnectDB(cfg.MongoURI, cfg.DBName); err != nil {
 		log.Printf("MongoDB unavailable; project administration routes disabled: %v", err)
