@@ -1,153 +1,86 @@
-# Evans Portfolio
+# Evans Juma Portfolio
 
-A modern full-stack portfolio application built to showcase software engineering projects, technical writing, and professional growth.
+Live portfolio: https://evans-portfolio-frontend.onrender.com
 
-This repository is more than a personal portfolio. It is a production-oriented software project that demonstrates how I approach software engineering—from planning and architecture to implementation, documentation, and deployment.
+Backend API: https://evans-portfolio-backend-w4sd.onrender.com
 
-The goal is to build a portfolio that not only presents my work but also reflects the engineering practices I value: clean architecture, maintainable code, thoughtful documentation, and continuous improvement.
+This is a React + Vite portfolio for Evans Juma, a backend software engineer focused on Go, distributed systems, dependable APIs, and AI-integrated services.
 
----
+## What Is Live
 
-## Overview
+- Responsive terminal-inspired portfolio with dark/light themes.
+- JSON-driven project case studies in `frontend/src/data/projects.json`.
+- Project filters and expandable problem/approach/outcome details.
+- Feature-flagged live hero status card using `VITE_ENABLE_LIVE_STATUS`.
+- Go/Gin API with MongoDB-backed project administration and a version-controlled status store.
+- Downloadable resume at `/evans-juma-resume.html`.
 
-The application is designed to serve multiple purposes:
+Current project statuses: Guidely is `Not Deployed`; African Vault is `In Progress`.
 
-* Present software engineering projects with detailed technical write-ups.
-* Showcase technical articles and educational content.
-* Demonstrate frontend and backend development skills.
-* Provide recruiters and fellow developers with insight into how I design, build, and maintain software.
-
----
-
-## Planned Features
-
-* Responsive and accessible user interface.
-* Project showcase with dedicated project pages.
-* Technical articles and learning resources.
-* Contact page with professional links.
-* Dark mode support.
-* Backend API for dynamic content.
-* Dockerized development and deployment workflow.
-
----
-
-## Technology Stack
-
-### Frontend
-
-* React 19
-* TypeScript
-* Vite
-* Tailwind CSS
-* React Router
-
-### Backend *(Planned)*
-
-* Go
-* Gin
-* PostgreSQL
-* JWT Authentication
-* Docker
-
----
-
-## Project Structure
+## API Endpoints
 
 ```text
-evans_portfolio/
-│
-├── frontend/
-├── backend/          # Planned
-├── docs/
-└── README.md
+GET /              service summary
+GET /api/health    health check
+GET /api/portfolio portfolio content
+GET /api/status    live hero status
+GET /api/projects  project records from MongoDB
 ```
 
----
+## Local Development
 
-## Getting Started
-
-Clone the repository:
+Frontend:
 
 ```bash
-git clone git@github.com:eojuma/evans_portfolio.git
-```
-
-Navigate to the frontend:
-
-```bash
-cd evans_portfolio/frontend
-```
-
-Install dependencies:
-
-```bash
+cd frontend
 npm install
-```
-
-Start the development server:
-
-```bash
 npm run dev
 ```
 
----
+Backend:
 
-## Available Scripts
+```bash
+cd backend
+go run ./cmd/api
+```
 
-| Command           | Description                           |
-| ----------------- | ------------------------------------- |
-| `npm run dev`     | Starts the development server         |
-| `npm run build`   | Builds the application for production |
-| `npm run lint`    | Runs ESLint                           |
-| `npm run preview` | Previews the production build         |
+Copy `backend/.env.example` to `backend/.env` and provide a MongoDB connection string for project administration. The frontend uses the local Vite proxy by default.
 
----
+## Deployment Variables
 
-## Roadmap
+Frontend production:
 
-### Completed
+```env
+VITE_ENABLE_LIVE_STATUS=true
+VITE_API_BASE_URL=https://evans-portfolio-backend-w4sd.onrender.com
+```
 
-* Repository initialization
-* React + TypeScript setup
-* Vite configuration
-* Tailwind CSS integration
-* GitHub SSH authentication
-* Development environment configuration
+Backend Render:
 
-### In Progress
+```env
+MONGO_URI=<MongoDB Atlas connection string>
+DB_NAME=evans_portfolio
+FRONTEND_ORIGIN=https://evans-portfolio-frontend.onrender.com
+GIN_MODE=release
+```
 
-* Project architecture
-* Design system
-* Application routing
-* Portfolio homepage
+Render supplies `PORT` automatically. Never commit real credentials or `.env` files.
 
-### Planned
+## Verification
 
-* Project detail pages
-* Technical articles section
-* Contact page
-* Go backend
-* REST API
-* Docker support
-* Deployment pipeline
+```bash
+cd frontend && npm run build && npm run lint
+cd ../backend && go test ./...
+```
 
----
+## Repository Layout
 
-## Documentation
-
-Detailed project documentation is available in the `docs/` directory.
-
-Planned documentation includes:
-
-* Project Overview
-* Software Architecture
-* Design System
-* API Design
-* Development Guide
-* Deployment Guide
-
----
+```text
+frontend/  React, TypeScript, Vite application
+backend/   Go/Gin API and MongoDB project administration
+docs/      Architecture, design, API, and deployment notes
+```
 
 ## License
 
-This project is licensed under the MIT License.
+MIT
