@@ -8,9 +8,10 @@ import (
 )
 
 type Config struct {
-	Port     string
-	MongoURI string
-	DBName   string
+	Port           string
+	MongoURI       string
+	DBName         string
+	FrontendOrigin string
 }
 
 func LoadConfig() *Config {
@@ -33,10 +34,12 @@ func LoadConfig() *Config {
 	if dbName == "" {
 		dbName = "evans_portfolio"
 	}
+	frontendOrigin := os.Getenv("FRONTEND_ORIGIN")
 
 	return &Config{
-		Port:     port,
-		MongoURI: mongoURI,
-		DBName:   dbName,
+		Port:           port,
+		MongoURI:       mongoURI,
+		DBName:         dbName,
+		FrontendOrigin: frontendOrigin,
 	}
 }
