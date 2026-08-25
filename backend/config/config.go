@@ -1,7 +1,6 @@
 package config
 
 import (
-	"log"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -15,10 +14,8 @@ type Config struct {
 }
 
 func LoadConfig() *Config {
-	// Load .env file if present
-	if err := godotenv.Load(); err != nil {
-		log.Println("Warning: .env file not found, falling back to system env")
-	}
+	// Render and other hosts inject environment variables directly; .env is optional.
+	_ = godotenv.Load()
 
 	port := os.Getenv("PORT")
 	if port == "" {
