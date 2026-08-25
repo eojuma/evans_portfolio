@@ -17,6 +17,7 @@ func main() {
 	r := gin.Default()
 	r.Use(middleware.CORSMiddleware(cfg.FrontendOrigin))
 
+	r.GET("/", handlers.GetRoot)
 	r.GET("/api/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok", "service": "evans-portfolio-api"})
 	})
