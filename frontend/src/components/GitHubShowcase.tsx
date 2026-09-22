@@ -42,23 +42,7 @@ export const GitHubShowcase = ({ username }: GitHubShowcaseProps) => {
     : 0;
 
   return (
-    <section className="gh-section">
-      <div className="gh-head">
-        <div>
-          <p className="eyebrow">
-            <span /> Open source
-          </p>
-          <h2>Code in the open.</h2>
-          <p>
-            Live from GitHub — repositories, languages, and activity pulled
-            straight from <strong>@{username}</strong>.
-          </p>
-        </div>
-        <a className="gh-profile" href={profileUrl} target="_blank" rel="noreferrer">
-          @{username} ↗
-        </a>
-      </div>
-
+    <div className="gh-showcase">
       <div className="gh-stats">
         <div>
           <b>{status === "ready" ? data?.profile.public_repos ?? "—" : "—"}</b>
@@ -124,6 +108,6 @@ export const GitHubShowcase = ({ username }: GitHubShowcaseProps) => {
           </a>
         </div>
       )}
-    </section>
+    </div>
   );
 };

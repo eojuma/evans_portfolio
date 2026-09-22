@@ -1,23 +1,21 @@
 package config
 
 import (
-	"log"
 	"os"
 
 	"github.com/joho/godotenv"
 )
 
 type Config struct {
-	Port     string
-	MongoURI string
-	DBName   string
+	Port           string
+	MongoURI       string
+	DBName         string
+	FrontendOrigin string
 }
 
 func LoadConfig() *Config {
-	// Load .env file if present
-	if err := godotenv.Load(); err != nil {
-		log.Println("Warning: .env file not found, falling back to system env")
-	}
+	// Render and other hosts inject environment variables directly; .env is optional.
+	_ = godotenv.Load()
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -33,10 +31,12 @@ func LoadConfig() *Config {
 	if dbName == "" {
 		dbName = "evans_portfolio"
 	}
+	frontendOrigin := os.Getenv("FRONTEND_ORIGIN")
 
 	return &Config{
-		Port:     port,
-		MongoURI: mongoURI,
-		DBName:   dbName,
+		Port:           port,
+		MongoURI:       mongoURI,
+		DBName:         dbName,
+		FrontendOrigin: frontendOrigin,
 	}
 }

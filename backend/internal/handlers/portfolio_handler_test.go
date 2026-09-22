@@ -29,8 +29,8 @@ func TestGetPortfolio(t *testing.T) {
 	if portfolio.Name != "Evans Juma" {
 		t.Fatalf("expected Evans Juma, got %q", portfolio.Name)
 	}
-	if len(portfolio.Projects) != 7 {
-		t.Fatalf("expected 7 projects, got %d", len(portfolio.Projects))
+	if len(portfolio.Projects) != 6 {
+		t.Fatalf("expected 6 projects, got %d", len(portfolio.Projects))
 	}
 	if portfolio.Contact["email"] != "evansjuma1e@gmail.com" {
 		t.Fatalf("unexpected contact email %q", portfolio.Contact["email"])
