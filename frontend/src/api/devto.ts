@@ -35,6 +35,12 @@ const writeCache = (data: DevToArticle[]) => {
   }
 };
 
+const normalizeTags = (tags: string | string[] | undefined): string[] => {
+  if (!tags) return [];
+  if (Array.isArray(tags)) return tags;
+  return tags.split(",").map((t) => t.trim()).filter(Boolean);
+};
+
 export const getDevToArticles = async (): Promise<DevToArticle[]> => {
   const cached = readCache();
   if (cached) return cached;
@@ -48,8 +54,12 @@ export const getDevToArticles = async (): Promise<DevToArticle[]> => {
   }
 
   const data = (await response.json()) as DevToArticle[];
-  writeCache(data);
-  return data;
+  const normalized = data.map((article) => ({
+    ...article,
+    tags: normalizeTags(article.tags),
+  }));
+  writeCache(normalized);
+  return normalized;
 };
 
 export const formatDevToDate = (iso: string): string => {
